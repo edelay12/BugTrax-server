@@ -1,5 +1,5 @@
 const express = require("express");
-const IssuesService = require('./Issues-service')
+const IssuesService = require('./issues-service')
 const { requireAuth } = require("../middleware/jwt-auth");
 const EventService = require('../issue-events/issue-events-service');
 
