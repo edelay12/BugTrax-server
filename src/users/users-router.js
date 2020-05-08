@@ -1,21 +1,18 @@
 const express = require("express");
-const UsersService = require('./users-service')
+const UsersService = require("./users-service");
 
 const UsersRouter = express.Router();
 const jsonBodyParser = express.json();
 
-UsersRouter
-.route("/").get((req, res, next) => {
-UsersService.getUsers(req.app.get('db'))
-.then(users => {
-    res.json(users);
-  })
-  .catch(next);
+UsersRouter.route("/").get((req, res, next) => {
+  UsersService.getUsers(req.app.get("db"))
+    .then(users => {
+      res.json(users);
+    })
+    .catch(next);
 });
 
-UsersRouter
-.route("/")
-.post( jsonBodyParser, (req, res, next) => {
+UsersRouter.route("/").post(jsonBodyParser, (req, res, next) => {
   const { password, user_name, full_name, title } = req.body;
 
   //check all required fields
@@ -47,9 +44,7 @@ UsersRouter
         };
         return UsersService.insertUser(req.app.get("db"), newUser).then(
           user => {
-            res
-              .status(201)
-              .json(UsersService.serializeUser(user));
+            res.status(201).json(UsersService.serializeUser(user));
           }
         );
       });
@@ -57,32 +52,24 @@ UsersRouter
     .catch(next);
 });
 
-UsersRouter
-.route('/setteam/:teamId')
-.patch( jsonBodyParser, (req, res, next) => {
-UsersService.updateUserTeam(req.app.get("db"), req.params.teamId, req.headers.user_id)
-.then(res.status(201))
-.catch(next)
+UsersRouter.route("/setteam/:teamId").patch(
+  jsonBodyParser,
+  (req, res, next) => {
+    UsersService.updateUserTeam(
+      req.app.get("db"),
+      req.params.teamId,
+      req.headers.user_id
+    )
+      .then(res.status(201))
+      .catch(next);
+  }
+);
+
+UsersRouter.route("/getuser/:userId").get((req, res, next) => {
+  const { user_id } = req.headers;
+  UsersService.getUserByUserId(req.app.get("db"), user_id)
+    .then(user => res.json(user))
+    .catch(next);
 });
-/* UsersService.getUsers(req.app.get('db'))
-.then(users => {
-    res.json(users);
-  })
-  .catch(next);
-}); */
-
-
-UsersRouter
-.route('/getuser/:userId')
-.get((req, res, next) => {
-const { user_id } = req.headers;
-UsersService.getUserByUserId(req.app.get("db"), user_id)
-.then(user => res.json(user))
-.catch(next)
-})
-
-
-
-
 
 module.exports = UsersRouter;

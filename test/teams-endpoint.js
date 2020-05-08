@@ -24,7 +24,7 @@ describe(`POST /api/teams`, () => {
     requiredFields.forEach(field => {
       const registerAttemptBody = {
         team_id: 1,
-        password: "testPassword",
+        password: "testPassword"
       };
 
       it(`responds with 400 required error when '${field}' is missing`, () => {
@@ -41,7 +41,7 @@ describe(`POST /api/teams`, () => {
       it(`responds 400 'Password be longer than 8 characters' when empty password`, () => {
         const userShortPassword = {
           team_id: 1,
-          password: "1234567",
+          password: "1234567"
         };
         return supertest(app)
           .post("/api/teams")
@@ -52,7 +52,7 @@ describe(`POST /api/teams`, () => {
       it(`responds 400 'Password be less than 72 characters' when long password`, () => {
         const userLongPassword = {
           team_id: 1,
-          password: "*".repeat(73),
+          password: "*".repeat(73)
         };
         return supertest(app)
           .post("/api/teams")

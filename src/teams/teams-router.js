@@ -1,10 +1,9 @@
 const express = require("express");
-const TeamsService = require('./teams-service')
-const UsersService = require('../users/users-service')
-const {requireAuth} = require('../middleware/jwt-auth')
+const TeamsService = require("./teams-service");
+const UsersService = require("../users/users-service");
+const { requireAuth } = require("../middleware/jwt-auth");
 const TeamsRouter = express.Router();
 const jsonBodyParser = express.json();
-
 
 /*
 
@@ -14,20 +13,17 @@ fix team password show, select only team name
 
 
 */
-TeamsRouter
-.route("/").get((req, res, next) => {
-TeamsService.getTeams(req.app.get('db'))
-.then(teams => {
-    res.json(teams);
-  })
-  .catch(next);
+TeamsRouter.route("/").get((req, res, next) => {
+  TeamsService.getTeams(req.app.get("db"))
+    .then(teams => {
+      res.json(teams);
+    })
+    .catch(next);
 });
 
-TeamsRouter
-.route("/")
-.post( jsonBodyParser, (req, res, next) => {
+TeamsRouter.route("/").post(jsonBodyParser, (req, res, next) => {
   const { company, team_name, team_password, team_admin } = req.body;
-const { userId } = req.headers;
+  const { userId } = req.headers;
 
   //check all required fields
   for (const field of ["team_name", "company", "team_password"])
@@ -35,9 +31,6 @@ const { userId } = req.headers;
       return res.status(400).json({
         error: `Missing '${field}' in request body`
       });
-
-      // check header fields
-
 
   // validate password
   const passwordError = TeamsService.validatePassword(team_password);
@@ -62,9 +55,7 @@ const { userId } = req.headers;
         };
         return TeamsService.insertTeam(req.app.get("db"), newUser).then(
           team => {
-            res
-              .status(201)
-              .json(TeamsService.serializeTeam(team));
+            res.status(201).json(TeamsService.serializeTeam(team));
           }
         );
       });
@@ -72,31 +63,23 @@ const { userId } = req.headers;
     .catch(next);
 });
 
-
-TeamsRouter
-.route("/:teamId/users") 
-.get(requireAuth, (req, res, next) => {
-  //verify this person is on team
-const { teamId, userId } = req.user;
-UsersService.getUsersByTeamId(req.app.get("db"), teamId, userId)
-.then(users => res.json(users))
-.catch(next);
+TeamsRouter.route("/:teamId/users").get(requireAuth, (req, res, next) => {
+  const { teamId, userId } = req.user;
+  UsersService.getUsersByTeamId(req.app.get("db"), teamId, userId)
+    .then(users => res.json(users))
+    .catch(next);
 });
 
-TeamsRouter
-.route("/teamname") 
-.get(requireAuth, (req, res, next) => {
-const {teamid} = req.headers;
-TeamsService.getTeamNameById(req.app.get('db'), teamid)
-.then(team => {
-  if(!team){
-    res.status(404).json({ error: `Team name not found` });
-  }
-  res.json(team)
-})
-.catch(next);
+TeamsRouter.route("/teamname").get(requireAuth, (req, res, next) => {
+  const { teamid } = req.headers;
+  TeamsService.getTeamNameById(req.app.get("db"), teamid)
+    .then(team => {
+      if (!team) {
+        res.status(404).json({ error: `Team name not found` });
+      }
+      res.json(team);
+    })
+    .catch(next);
 });
-
-
 
 module.exports = TeamsRouter;
