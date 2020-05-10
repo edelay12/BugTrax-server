@@ -29,60 +29,70 @@ function makeUsersArray() {
 function makeIssuesArray() {
   return [
     {
-      picture_main:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW53qxXfUWco&psig=AOvVaw1m86lzqY6AQpq-m6fZ4SiY&ust=1582146521789000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCg6JyB3OcCFQAAAAAdAAAAABAI",
-      product_name: "Death Wish",
-      product_roast: "Dark",
-      price: 17,
-      details:
-        "Smooth and Sweet USDA Organic, ethically sourced coffee from Peru and Nicaragua.",
-      origin: "Peru",
-      collection: "cold",
-      sale: "False",
-      sale_price: null,
-      featured: "False"
+      team_id: 2,
+      category: "Bug",
+      summary: "Summry of test issue",
+      description: 'description of test issue',
+      severity: "minor",
+      priority: "low",
+      resolution: "new",
+      creator_id: 2,
+      creator_user_name: "jApple"
     },
     {
-      picture_main:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW53qxXfUWco&psig=AOvVaw1m86lzqY6AQpq-m6fZ4SiY&ust=1582146521789000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCg6JyB3OcCFQAAAAAdAAAAABAI",
-      product_name: "Death Wish",
-      product_roast: "Dark",
-      price: 16,
-      details:
-        "Smooth and Sweet USDA Organic, ethically sourced coffee from Peru and Nicaragua.",
-      origin: "Peru",
-      collection: "cold",
-      sale: "False",
-      sale_price: null,
-      featured: "False"
+      team_id: 2,
+      category: "Bug",
+      summary: "Summry of test issue",
+      description: 'description of test issue',
+      severity: "minor",
+      priority: "low",
+      resolution: "new",
+      creator_id: 2,
+      creator_user_name: "jApple"
     },
     {
-      picture_main:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW53qxXfUWco&psig=AOvVaw1m86lzqY6AQpq-m6fZ4SiY&ust=1582146521789000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCg6JyB3OcCFQAAAAAdAAAAABAI",
-      product_name: "Stone Street",
-      product_roast: "Dark",
-      price: 25,
-      details:
-        "Smooth and Sweet USDA Organic, ethically sourced coffee from Peru and Nicaragua.",
-      origin: "Peru",
-      collection: "cold",
-      sale: "False",
-      sale_price: null,
-      featured: "False"
+      team_id: 2,
+      category: "Bug",
+      summary: "Summry of test issue",
+      description: 'description of test issue',
+      severity: "minor",
+      priority: "low",
+      resolution: "new",
+      creator_id: 2,
+      creator_user_name: "jApple"
     },
     {
-      picture_main:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DW53qxXfUWco&psig=AOvVaw1m86lzqY6AQpq-m6fZ4SiY&ust=1582146521789000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMCg6JyB3OcCFQAAAAAdAAAAABAI",
-      product_name: "Tiny Footprint",
-      product_roast: "Dark",
-      price: 25,
-      details:
-        "Smooth and Sweet USDA Organic, ethically sourced coffee from Peru and Nicaragua.",
-      origin: "Peru",
-      collection: "cold",
-      sale: "False",
-      sale_price: null,
-      featured: "True"
+      team_id: 2,
+      category: "Bug",
+      summary: "Summry of test issue",
+      description: 'description of test issue',
+      severity: "minor",
+      priority: "low",
+      resolution: "new",
+      creator_id: 2,
+      creator_user_name: "jApple"
+    },
+    {
+      team_id: 2,
+      category: "Bug",
+      summary: "Summry of test issue",
+      description: 'description of test issue',
+      severity: "minor",
+      priority: "low",
+      resolution: "new",
+      creator_id: 2,
+      creator_user_name: "jApple"
+    },
+    {
+      team_id: 2,
+      category: "Bug",
+      summary: "Summry of test issue",
+      description: 'description of test issue',
+      severity: "minor",
+      priority: "low",
+      resolution: "new",
+      creator_id: 2,
+      creator_user_name: "jApple"
     }
   ];
 }

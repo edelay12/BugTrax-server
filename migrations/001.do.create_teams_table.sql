@@ -7,3 +7,4 @@
     creator_id NUMERIC,
     date_created TIMESTAMP NOT NULL DEFAULT now()
 )
+

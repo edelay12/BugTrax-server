@@ -7,6 +7,11 @@ const TeamsService = {
   getTeams(db) {
     return db.from("teams").select("*");
   },
+  getTeamWithId(db, id){
+    return db("teams")
+      .where({ id })
+      .first();
+  },
   checkTeamName(db, team_name) {
     return db("teams")
       .where({ team_name })
@@ -39,10 +44,12 @@ const TeamsService = {
     return null;
   },
   getTeamNameById(db, teamId) {
+    console.log(teamId)
     return db("teams")
       .where({ id: teamId })
       .first()
       .then(team => {
+        console.log(team)
         return team.team_name;
       });
   },

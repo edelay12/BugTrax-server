@@ -1,6 +1,6 @@
 const express = require("express");
 const UsersService = require("./users-service");
-
+const AuthService = require("../auth/auth-service");
 const UsersRouter = express.Router();
 const jsonBodyParser = express.json();
 
@@ -58,9 +58,22 @@ UsersRouter.route("/setteam/:teamId").patch(
     UsersService.updateUserTeam(
       req.app.get("db"),
       req.params.teamId,
+      req.headers.teamName,
       req.headers.user_id
     )
-      .then(res.status(201))
+      .then(user => {
+        const sub = user.user_name;
+        const payload = {
+          userId: user.id,
+          teamId: user.team_id,
+          teamName: user.team_name,
+          user_name: user.user_name,
+          full_name: user.full_name
+        };
+        res.send({
+          authToken: AuthService.createJwt(sub, payload)
+        })
+      })
       .catch(next);
   }
 );

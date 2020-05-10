@@ -49,12 +49,15 @@ const UsersService = {
       .where({ team_id })
       .whereNot({ id: user_id });
   },
-  updateUserTeam(db, team_id, user_id) {
+  updateUserTeam(db, team_id, team_name, user_id) {
+    console.log(team_name)
     return db
       .from("users")
       .where("id", user_id)
-      .update({ team_id });
-  },
+      .update({ team_id : Number(team_id), team_name: team_name})
+      .returning("*")
+      .then(([user]) => user);
+    },
   getUserByUserId(db, id) {
     return db
       .select("*")

@@ -4,27 +4,22 @@ var moment = require("moment");
 const ChartsService = {
   getMonthlyData(db, teamId) {
     let monthlyData = [];
-    return (
-      db
+    return db
         .from("issues")
         .count("date_created as count")
         .where({ team_id: teamId })
-        // .groupByRaw("date_trunc('month', date_created::date)")
-
-        .groupByRaw("EXTRACT(MONTH FROM date_created::date)")
-
+        .groupByRaw("date_trunc('month', date_created::date)")
         .as("month")
-        //  .andWhereRaw(`EXTRACT(MONTH FROM date_created::date) = ?`, [1])
         .then(rows => {
-          console.log("Monthly data");
-          console.log(rows);
-          rows;
+           for(let i = 0; i < 5; i++){
+               rows[i] ? monthlyData.push(Number(rows[i].count)) : monthlyData.push(0); 
+           }
+           return monthlyData.reverse();
         })
         .catch(e => {
           console.log(e);
         })
-    );
-  },
+      },
   getUserDays(db, user_id) {
     return db
       .from("users")
